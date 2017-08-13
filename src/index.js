@@ -49,7 +49,7 @@ class MyTimeline {
             return;
         this.slider.width = sliderWidth;
 
-        const minWidth = 80;
+        const minWidth = 100;
         const maxDotCount = Math.ceil(sliderWidth / minWidth);
         const deltaSliderTimestamp = (this.slider.max - this.slider.min);
         const units = [

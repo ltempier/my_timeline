@@ -1,7 +1,8 @@
+
 .my-timeline-container .dots-table-container {
     padding-left: 10px;
     padding-right: 6px;
-    margin-bottom: -6px;
+    margin-bottom: -4px;
 }
 
 .my-timeline-container .dots-table-container .dots-table {
@@ -14,12 +15,13 @@
     border-left: solid 4px black;
     border-right: solid 4px black;
     text-align: center;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 900;
 }
 
 .my-timeline-container .slider {
     -webkit-appearance: none;
     -moz-appearance: none;
-
     background-color: black;
     width: 100%;
     height: 4px;
