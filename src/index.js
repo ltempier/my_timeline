@@ -3,6 +3,12 @@
 class MyTimeline {
 
     constructor(selector) {
+        this._oldSliderValue = null;
+        this.$container = null;
+        this.$slider = null;
+        this.$dots = null;
+        this.slider = {};
+
         if (selector && $(selector).length) {
             this._init(selector)
         } else
@@ -13,7 +19,6 @@ class MyTimeline {
         this.$container = $(selector);
         this.$container.addClass('my-timeline-container');
         this.$container.empty();
-        $(window).resize(this._refreshDots.bind(this));
 
         this.$slider = $('<input type="range" class="slider">');
 
@@ -27,23 +32,24 @@ class MyTimeline {
 
         this.$dots = $('<table class="dots-table"></table>');
         var $dotsContainer = $('<div class="dots-table-container"></div>');
-        $dotsContainer.append(this.$dots)
+        $dotsContainer.append(this.$dots);
         this.$container.append($dotsContainer);
-        this.$container.append(this.$slider)
+        this.$container.append(this.$slider);
 
+        $(window).resize(this._refreshDots.bind(this));
     }
 
     _refreshDots(force) {
 
         var sliderWidth = this.$slider.width();
-        if (!force && sliderWidth == this.slider.width)
+        if (!force && sliderWidth === this.slider.width)
             return;
+        this.slider.width = sliderWidth;
 
-        var minWidth = 80;
-        var maxDotCount = Math.ceil(sliderWidth / minWidth);
-
-        var deltaSliderTimestamp = (this.slider.max - this.slider.min);
-        var units = [
+        const minWidth = 80;
+        const maxDotCount = Math.ceil(sliderWidth / minWidth);
+        const deltaSliderTimestamp = (this.slider.max - this.slider.min);
+        const units = [
             {
                 name: 'years',
                 step: 31536000000,
@@ -85,8 +91,8 @@ class MyTimeline {
 
         while (current.valueOf() <= this.slider.max) {
 
-            var next = moment(current).startOf(dotUnit.name).add(1, dotUnit.name);
-            var width100 = (next.diff(current) / deltaSliderTimestamp) * 100;
+            let next = moment(current).startOf(dotUnit.name).add(1, dotUnit.name);
+            let width100 = (next.diff(current) / deltaSliderTimestamp) * 100;
             dots.push({
                 text: current.format(dotUnit.format),
                 width: width100 + "%"
@@ -122,6 +128,11 @@ class MyTimeline {
                 return true;
             return false;
         });
+
+        if (this._oldSliderValue && this._oldSliderValue == buffer)
+            return;
+        this._oldSliderValue = buffer;
+
         this.onSliderChange(buffer)
     }
 
@@ -160,9 +171,8 @@ class MyTimeline {
         this._refreshDots(true);
     }
 
-
     onSliderChange(value) {
-        console.log(moment(value.timestamp).format('YYYY-MM-DD HH:ss'))
+        console.log('TODO surcharge fn')
     }
 }
 

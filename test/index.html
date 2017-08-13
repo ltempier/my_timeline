@@ -5,28 +5,36 @@
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <title>my_timeline test</title>
     <link rel="stylesheet" href="../src/style.css"/>
+    <!--<link rel="stylesheet" href="../dist/my-timelyne.min.css"/>-->
+
 </head>
 <body>
 
 <div id="container"></div>
 
-<script src="./jquery-2.2.4.min.js"></script>
-<script src="./moment-2.18.1.min.js"></script>
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script src="../node_modules/moment/min/moment.min.js"></script>
 <script src="../src/index.js"></script>
+<!--<script src="../dist/MyTimeline.js"></script>-->
 
 <script>
-
 
     var values = [];
     var now = Date.now();
     for (var i = 0; i < 300; i++) {
         values.push({
-            timestamp: now - i * 24 * 60 * 60 * 1000
+            timestamp: now - i * 24 * 60 * 60 * 1000,
+            idx: i
         })
     }
 
     var timeline = new MyTimeline("#container");
-    timeline.setValues(values)
+    timeline.onSliderChange = function (value) {
+        console.log('Slider value change');
+        console.log('idx:', value.idx, 'date:',moment(value.timestamp).format('YYYY-MM-DD HH:mm:ss'))
+    };
+
+    timeline.setValues(values);
 
 </script>
 

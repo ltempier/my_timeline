@@ -1,2 +1,4 @@
 .idea
 my_timeline.iml
+node_modules
+*.log
