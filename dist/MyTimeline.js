@@ -5,7 +5,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var MyTimeline = function () {
-    function MyTimeline(selector) {
+    function MyTimeline(selector, values) {
         _classCallCheck(this, MyTimeline);
 
         this._oldSliderValue = null;
@@ -17,6 +17,8 @@ var MyTimeline = function () {
         if (selector && $(selector).length) {
             this._init(selector);
         } else throw new Error('timeline selector doesn\'t exist');
+
+        if (values) this.setValues(values);
     }
 
     _createClass(MyTimeline, [{
@@ -174,6 +176,12 @@ var MyTimeline = function () {
         key: 'onSliderChange',
         value: function onSliderChange(value) {
             console.log('TODO surcharge fn');
+        }
+    }, {
+        key: 'setOnSliderChange',
+        value: function setOnSliderChange(fn, call) {
+            this.onSliderChange = fn;
+            if (call) fn(this.slider.values[this.slider.values.length - 1]);
         }
     }]);
 

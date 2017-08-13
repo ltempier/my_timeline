@@ -2,7 +2,7 @@
 
 class MyTimeline {
 
-    constructor(selector) {
+    constructor(selector, values) {
         this._oldSliderValue = null;
         this.$container = null;
         this.$slider = null;
@@ -12,7 +12,10 @@ class MyTimeline {
         if (selector && $(selector).length) {
             this._init(selector)
         } else
-            throw new Error('timeline selector doesn\'t exist')
+            throw new Error('timeline selector doesn\'t exist');
+
+        if(values)
+            this.setValues(values)
     }
 
     _init(selector) {
@@ -173,6 +176,12 @@ class MyTimeline {
 
     onSliderChange(value) {
         console.log('TODO surcharge fn')
+    }
+
+    setOnSliderChange(fn, call) {
+        this.onSliderChange = fn;
+        if (call)
+            fn(this.slider.values[this.slider.values.length - 1])
     }
 }
 
