@@ -55,7 +55,7 @@ var MyTimeline = function () {
             if (!force && sliderWidth === this.slider.width) return;
             this.slider.width = sliderWidth;
 
-            var minWidth = 80;
+            var minWidth = 100;
             var maxDotCount = Math.ceil(sliderWidth / minWidth);
             var deltaSliderTimestamp = this.slider.max - this.slider.min;
             var units = [{
