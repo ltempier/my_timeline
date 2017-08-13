@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <title>my_timeline test</title>
+    <link rel="stylesheet" href="../src/style.css"/>
+</head>
+<body>
+
+<div id="container"></div>
+
+<script src="./jquery-2.2.4.min.js"></script>
+<script src="./moment-2.18.1.min.js"></script>
+<script src="../src/index.js"></script>
+
+<script>
+
+
+    var values = [];
+    var now = Date.now();
+    for (var i = 0; i < 300; i++) {
+        values.push({
+            timestamp: now - i * 24 * 60 * 60 * 1000
+        })
+    }
+
+    var timeline = new MyTimeline("#container");
+    timeline.setValues(values)
+
+</script>
+
+</body>
+</html>
